@@ -18,24 +18,26 @@ namespace CodeFirstMvc.Service
             _personRepository = personRepository;
         }
 
-        public void AddPeople(People people)
+        public void AddPerson(People people)
         {
             _personRepository.Add(people);
+            _personRepository.SaveChanges();
         }
 
-        public IEnumerable<People> GetAllPeople()
+        public IEnumerable<People> GetAll()
         {
-            //throw new NotImplementedException();
             return _personRepository.GetAll();
+        }
+
+        public People GetPersonById(int id)
+        {
+            return _personRepository.GetById(id);
         }
     }
     public interface IPersonService
     {
-        IEnumerable<People> GetAllPeople();
-
-        //People GetPeopleById(int id)
-        //{
-        //    return _personRepository.GetById(id);
-        //}
+        IEnumerable<People> GetAll();
+        People GetPersonById(int id);
+        void AddPerson(People people);
     }
 }
